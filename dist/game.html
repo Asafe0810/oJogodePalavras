@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f1e8">
+    <meta name="description" content="Um jogo casual de adivinhação de palavras com pistas graduais.">
+    <title>Entrelinhas | Jogo de palavras</title>
+    <script type="module" crossorigin src="/assets/game-CHYZl834.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/game-DjNWs871.css">
+  </head>
+  <body>
+    <div id="app">
+      <main class="shell">
+        <header class="masthead">
+          <div class="masthead-copy">
+            <p class="eyebrow" data-eyebrow>Um jogo de pistas e palavras</p>
+            <h1 data-page-title>Descubra a palavra.</h1>
+            <p class="page-intro" data-page-intro>Uma pista por vez. Seis tentativas. Sem pressa.</p>
+          </div>
+          <div class="masthead-side" aria-hidden="true">ENTRELINHAS<br>JOGO DE PALAVRAS</div>
+        </header>
+
+        <section class="game-card" aria-label="Entrelinhas">
+          <header class="paper-bar utility-bar">
+            <div class="brand">
+              <span class="brand-mark" aria-hidden="true">E</span>
+              <span><span class="brand-name" data-brand>Entrelinhas</span><span class="brand-descriptor" data-brand-descriptor>caderno de palavras</span></span>
+            </div>
+            <div class="utility-actions">
+              <div class="language-wrap">
+                <span class="lang-caption" data-next-language>PRÓXIMA RODADA</span>
+                <div class="language-control" role="group" aria-label="Idioma da próxima rodada">
+                  <button type="button" data-language="pt-BR" aria-pressed="true">PT</button>
+                  <button type="button" data-language="en" aria-pressed="false">EN</button>
+                </div>
+              </div>
+              <button class="history-trigger" id="open-history" type="button" aria-haspopup="dialog" aria-controls="history-dialog"><span data-history-label>Histórico</span> <span data-history-count>0</span></button>
+            </div>
+          </header>
+
+          <div id="active-game" class="paper-grid">
+            <aside class="paper-rail" aria-label="Tentativas">
+              <span class="round-number" data-round-number>01</span>
+              <p class="rail-caption"><strong data-remaining>6</strong> <span data-remaining-label>chances restantes</span></p>
+              <ol class="attempt-rail" id="attempt-rail" aria-label="Progresso das tentativas"></ol>
+            </aside>
+
+            <section class="paper-content" aria-labelledby="game-title">
+              <p class="micro-label"><span data-clue-label>Pista</span> <span id="clue-current">1</span> <span aria-hidden="true">/</span> <span id="clue-total">3</span></p>
+              <h2 id="game-title" data-question>Qual é a palavra?</h2>
+              <p class="paper-subtitle"><span id="game-language">Português</span> <span aria-hidden="true">·</span> <span data-language-hint>mínimo de seis letras</span></p>
+              <div class="answer-tiles" id="answer-tiles" aria-label="Palavra oculta"></div>
+              <ol class="clue-list" id="clue-list" aria-label="Pistas da palavra"></ol>
+            </section>
+
+            <section class="paper-action" aria-labelledby="guess-heading">
+              <p class="micro-label" data-deduce>Sua dedução</p>
+              <form class="guess-form" id="guess-form">
+                <label id="guess-heading" for="guess-input" data-guess-label>Qual palavra você imagina?</label>
+                <div class="guess-row-input">
+                  <input id="guess-input" name="guess" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="guess-status" placeholder="Digite seu palpite">
+                  <button class="submit-button" id="submit-guess" type="submit" data-submit>Enviar</button>
+                </div>
+              </form>
+              <p class="feedback" id="guess-status" role="status" aria-live="polite"></p>
+              <h3 class="micro-label guess-list-heading" data-guesses-label>Seus palpites</h3>
+              <ol class="guess-history" id="guess-list" aria-label="Seus palpites"></ol>
+              <p class="guess-empty" id="guess-empty" data-empty-guesses>Seus palpites aparecerão aqui.</p>
+
+              <section class="round-summary" id="round-summary" aria-live="polite" hidden>
+                <p class="result-label" id="result-label"></p>
+                <h3 id="revealed-answer" tabindex="-1"></h3>
+                <p class="definition-label" data-definition-label>Definição</p>
+                <p class="definition-copy" id="definition-copy"></p>
+                <button class="next-button" id="next-round" type="button" data-next-round>Próxima partida</button>
+              </section>
+            </section>
+          </div>
+
+          <section class="catalog-exhausted" id="catalog-exhausted" aria-live="polite" hidden>
+            <p class="micro-label" data-cycle-complete>CICLO CONCLUÍDO</p>
+            <h2 data-exhausted-title>Você chegou ao fim deste ciclo.</h2>
+            <p data-exhausted-body>Todas as palavras deste idioma já apareceram. Você pode começar um novo ciclo; o histórico anterior será mantido.</p>
+            <button class="submit-button" id="restart-cycle" type="button" data-restart-cycle>Começar novo ciclo</button>
+          </section>
+        </section>
+
+        <footer class="page-footer"><span data-footer-note>Histórico salvo somente neste navegador.</span><span data-footer-tagline>SEM CONTA · SEM ANÚNCIOS</span></footer>
+      </main>
+
+      <dialog id="history-dialog" aria-labelledby="history-title">
+        <div class="dialog-head">
+          <div><p class="micro-label" data-history-kicker>PARTIDAS CONCLUÍDAS</p><h2 id="history-title" data-history-title>Seu histórico</h2></div>
+          <button class="quiet-button" id="close-history" type="button" data-close-history aria-label="Fechar histórico">Fechar</button>
+        </div>
+        <div class="dialog-content">
+          <p class="dialog-note" data-history-note>Partidas concluídas, salvas somente neste navegador.</p>
+          <p class="feedback dialog-feedback" id="history-feedback" role="status" aria-live="polite"></p>
+          <ol class="history-list" id="history-list"></ol>
+          <div class="dialog-actions">
+            <button class="quiet-button clear-history" id="clear-history" type="button" data-clear-history>Apagar histórico</button>
+            <span class="dialog-total" id="history-total"></span>
+          </div>
+        </div>
+      </dialog>
+    </div>
+  </body>
+</html>
